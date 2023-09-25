@@ -17,7 +17,7 @@ public class BankAccount
     public double AnnualInterestRate { get; }
     public int NumberOfDeposits { get; private set; }
     public int Numberofwithdrawals { get; private set; }
-    public decimal MonthlyServiceCharge { get; private set; }
+    public decimal MonthlyServiceCharge { get; set; }
 
     public void Deposit(decimal depositAmount)
     {
@@ -38,12 +38,12 @@ public class BankAccount
         Balance = Balance + monthlyInterest;
     }
 
-    public void MonthlyProcess()
+    public virtual void MonthlyProcess()
     {
         Balance -= MonthlyServiceCharge;
         CalculateInterest();
         NumberOfDeposits = Numberofwithdrawals = 0;
-        MonthlyServiceCharge = 0.0m;
+        MonthlyServiceCharge = 0;
     }
 }
 
