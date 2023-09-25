@@ -1,4 +1,6 @@
-﻿namespace BankingApp.Logic.Testing;
+﻿using NUnit.Framework.Internal;
+
+namespace BankingApp.Logic.Testing;
 
 public class AsavingsAccount
 {
@@ -37,6 +39,21 @@ public class AsavingsAccount
 		sut.MonthlyProcess();
 		Assert.That(sut.Status, Is.EqualTo(SavingAccount.AccountStatus.Active));
     }
+
+	[Test]	
+	public void NumberOfWithdrawalsEqualTo5()
+	{
+		var sut = new SavingAccount(50, .01);
+		sut.Withdraw(10);
+		sut.Withdraw(5);
+		sut.Withdraw(5);
+		sut.WithDraw(2);
+		sut.Withdraw(2);
+		sut.MonthlyServiceCharge = 5.0m;
+		sut.MonthlyProcess();
+		Assert.That(sut.Status, Is.EqualTo(SavingAccount.AccountStatus.Inactive));
+
+	}
 
 
 }
